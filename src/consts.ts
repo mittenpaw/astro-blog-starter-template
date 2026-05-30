@@ -1,4 +1,4 @@
-export const SITE_TITLE = "リキンダ | 個人ブログ";
-export const SITE_DESCRIPTION = "技術・日常・思考を綴るパーソナルブログ。";
+export const SITE_TITLE = "リキンダ | 僧侶の覚書";
+export const SITE_DESCRIPTION = "真宗大谷派の僧侶が、龍樹・AI・日常について思ったことを書き連ねるブログ。";
 export const AUTHOR_NAME = "リキンダ";
 export const AUTHOR_EMAIL = "yoshio_kawamoto@hotmail.com";
