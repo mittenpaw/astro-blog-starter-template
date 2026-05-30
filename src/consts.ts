@@ -1,4 +1,4 @@
-export const SITE_TITLE = "リキンダ | 僧侶の覚書";
-export const SITE_DESCRIPTION = "真宗大谷派の僧侶が、龍樹・AI・日常について思ったことを書き連ねるブログ。";
+export const SITE_TITLE = "真照寺";
+export const SITE_DESCRIPTION = "真宗大谷派 真照寺の公式ウェブサイト。法要・行事のご案内、住職のブログをご覧いただけます。";
 export const AUTHOR_NAME = "リキンダ";
 export const AUTHOR_EMAIL = "yoshio_kawamoto@hotmail.com";

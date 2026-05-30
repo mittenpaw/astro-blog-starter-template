@@ -8,7 +8,13 @@ import FormattedDate from '../components/FormattedDate.astro';
 
 const recentPosts = (await getCollection('blog'))
 	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-	.slice(0, 5);
+	.slice(0, 3);
+
+const upcomingEvents = [
+	{ month: "11月", name: "報恩講", date: "11月下旬" },
+	{ month: "1月", name: "修正会", date: "1月1日" },
+	{ month: "3月", name: "春季彼岸会", date: "春分の日前後" },
+];
 ---
 
 <!doctype html>
@@ -19,43 +25,71 @@ const recentPosts = (await getCollection('blog'))
 			main {
 				max-width: 680px;
 				margin: 0 auto;
-				padding: 4em 1.5em 6em;
+				padding: 0 1.5em 6em;
 			}
 
-			/* ── 冒頭の一行 ── */
-			.opening {
+			/* ── ヒーロー ── */
+			.hero {
 				text-align: center;
-				padding: 5em 0 4em;
+				padding: 5em 0 4.5em;
 				border-bottom: 1px solid rgb(var(--gray-light));
 				margin-bottom: 4em;
 			}
-			.opening .phrase {
-				font-size: 1.5em;
+			.hero .denomination {
+				font-size: 0.78em;
+				letter-spacing: 0.3em;
+				color: rgb(var(--gray));
+				margin: 0 0 0.6em;
+			}
+			.hero .temple-name {
+				font-size: 2.4em;
 				font-weight: 400;
-				letter-spacing: 0.15em;
+				letter-spacing: 0.2em;
 				color: rgb(var(--black));
-				line-height: 1.6;
-				margin: 0 0 1.5em;
+				margin: 0 0 0.5em;
+				line-height: 1.2;
 			}
-			.opening .phrase em {
-				font-style: normal;
-				color: var(--accent);
-			}
-			.opening .byline {
-				font-size: 0.85em;
+			.hero .tagline {
+				font-size: 0.95em;
+				letter-spacing: 0.18em;
 				color: rgb(var(--gray));
-				letter-spacing: 0.1em;
+				margin: 0 0 2em;
+			}
+			.hero .address {
+				font-size: 0.8em;
+				color: rgb(var(--gray));
+				letter-spacing: 0.08em;
+				margin: 0 0 2em;
 				line-height: 2;
-				margin: 0;
 			}
-			.opening .byline a {
-				color: rgb(var(--gray));
+			.hero-links {
+				display: flex;
+				justify-content: center;
+				gap: 1em;
+			}
+			.hero-links a {
+				font-size: 0.82em;
+				letter-spacing: 0.1em;
+				padding: 0.6em 1.6em;
+				border: 1px solid rgb(var(--gray-light));
+				color: rgb(var(--gray-dark));
 				text-decoration: none;
-				border-bottom: 1px solid rgb(var(--gray-light));
+				border-radius: 2px;
+				transition: all 0.15s;
 			}
-			.opening .byline a:hover {
+			.hero-links a:hover {
+				border-color: var(--accent);
 				color: var(--accent);
-				border-bottom-color: var(--accent);
+			}
+			.hero-links a.primary {
+				background: var(--accent);
+				border-color: var(--accent);
+				color: white;
+			}
+			.hero-links a.primary:hover {
+				background: var(--accent-dark);
+				border-color: var(--accent-dark);
+				color: white;
 			}
 
 			/* ── セクション見出し ── */
@@ -76,10 +110,10 @@ const recentPosts = (await getCollection('blog'))
 				background: rgb(var(--gray-light));
 			}
 
-			/* ── 記事リスト ── */
+			/* ── お知らせリスト ── */
 			.posts {
 				list-style: none;
-				margin: 0 0 5em;
+				margin: 0 0 1.5em;
 				padding: 0;
 			}
 			.posts li {
@@ -87,7 +121,7 @@ const recentPosts = (await getCollection('blog'))
 			}
 			.posts li a {
 				display: block;
-				padding: 1.6em 0;
+				padding: 1.4em 0;
 				text-decoration: none;
 				color: inherit;
 				transition: all 0.15s;
@@ -96,35 +130,32 @@ const recentPosts = (await getCollection('blog'))
 				color: var(--accent);
 			}
 			.post-title {
-				font-size: 1.05em;
+				font-size: 1em;
 				font-weight: 700;
 				color: rgb(var(--black));
-				margin: 0 0 0.4em;
+				margin: 0 0 0.35em;
 				line-height: 1.5;
 				letter-spacing: 0.02em;
 				transition: color 0.15s;
 			}
 			.post-meta {
-				display: flex;
-				align-items: center;
-				gap: 0.8em;
 				font-size: 0.78em;
 				color: rgb(var(--gray));
 				letter-spacing: 0.05em;
 			}
 			.post-desc {
-				margin: 0.5em 0 0;
-				font-size: 0.88em;
+				margin: 0.4em 0 0;
+				font-size: 0.87em;
 				color: rgb(var(--gray));
 				line-height: 1.7;
 			}
 
 			.more-link {
 				text-align: right;
-				margin-bottom: 5em;
+				margin-bottom: 4.5em;
 			}
 			.more-link a {
-				font-size: 0.85em;
+				font-size: 0.82em;
 				letter-spacing: 0.08em;
 				color: var(--accent);
 				text-decoration: none;
@@ -132,27 +163,42 @@ const recentPosts = (await getCollection('blog'))
 				padding-bottom: 1px;
 			}
 
-			/* ── テーマ一覧 ── */
-			.themes {
-				display: flex;
-				flex-wrap: wrap;
-				gap: 0.8em;
-				margin: 0 0 2em;
+			/* ── 年間行事プレビュー ── */
+			.events-list {
+				list-style: none;
+				padding: 0;
+				margin: 0 0 1.5em;
 			}
-			.theme-tag {
-				font-size: 0.82em;
-				padding: 0.4em 1em;
-				border: 1px solid rgb(var(--gray-light));
-				border-radius: 2px;
-				color: rgb(var(--gray));
+			.events-list li {
+				display: flex;
+				align-items: baseline;
+				gap: 1.2em;
+				padding: 1em 0;
+				border-bottom: 1px solid rgb(var(--gray-light));
+				font-size: 0.9em;
+			}
+			.event-month {
+				font-size: 0.78em;
+				color: var(--accent);
 				letter-spacing: 0.05em;
-				background: white;
+				min-width: 2.5em;
+			}
+			.event-name {
+				color: rgb(var(--black));
+				font-weight: 700;
+				letter-spacing: 0.05em;
+				flex: 1;
+			}
+			.event-date {
+				font-size: 0.82em;
+				color: rgb(var(--gray));
+				letter-spacing: 0.03em;
 			}
 
 			@media (max-width: 720px) {
-				.opening { padding: 3em 0 2.5em; }
-				.opening .phrase { font-size: 1.2em; }
-				main { padding: 2em 1.2em 4em; }
+				.hero { padding: 3.5em 0 3em; }
+				.hero .temple-name { font-size: 1.8em; }
+				main { padding: 0 1.2em 4em; }
 			}
 		</style>
 	</head>
@@ -160,18 +206,21 @@ const recentPosts = (await getCollection('blog'))
 		<Header />
 		<main>
 
-			<div class="opening">
-				<p class="phrase">
-					すべては<em>空</em>である——<br>だから、つながる。
+			<div class="hero">
+				<p class="denomination">真宗大谷派</p>
+				<h1 class="temple-name">真照寺</h1>
+				<p class="tagline">念仏の道を、ともに歩む。</p>
+				<p class="address">
+					〒XXX-XXXX 〇〇県〇〇市〇〇町X-X<br>
+					TEL: 0XX-XXX-XXXX
 				</p>
-				<p class="byline">
-					真宗大谷派 僧侶・リキンダによる覚書。<br>
-					龍樹の哲学と人工知能について、思ったことを書き連ねています。<br>
-					<a href={`${import.meta.env.BASE_URL}/about`}>プロフィール</a>
-				</p>
+				<div class="hero-links">
+					<a class="primary" href={`${import.meta.env.BASE_URL}/access`}>アクセス</a>
+					<a href={`${import.meta.env.BASE_URL}/events`}>年間行事</a>
+				</div>
 			</div>
 
-			<p class="section-label">最近の思索</p>
+			<p class="section-label">最新のお知らせ</p>
 			<ul class="posts">
 				{
 					recentPosts.map((post) => (
@@ -190,17 +239,23 @@ const recentPosts = (await getCollection('blog'))
 				}
 			</ul>
 			<div class="more-link">
-				<a href={`${import.meta.env.BASE_URL}/blog`}>すべての記事 →</a>
+				<a href={`${import.meta.env.BASE_URL}/blog`}>すべてのお知らせ →</a>
 			</div>
 
-			<p class="section-label">主なテーマ</p>
-			<div class="themes">
-				<span class="theme-tag">龍樹・中観思想</span>
-				<span class="theme-tag">空（śūnyatā）</span>
-				<span class="theme-tag">真宗大谷派</span>
-				<span class="theme-tag">人工知能（AI）</span>
-				<span class="theme-tag">仏教と哲学</span>
-				<span class="theme-tag">親鸞</span>
+			<p class="section-label">年間行事</p>
+			<ul class="events-list">
+				{
+					upcomingEvents.map((e) => (
+						<li>
+							<span class="event-month">{e.month}</span>
+							<span class="event-name">{e.name}</span>
+							<span class="event-date">{e.date}</span>
+						</li>
+					))
+				}
+			</ul>
+			<div class="more-link">
+				<a href={`${import.meta.env.BASE_URL}/events`}>すべての行事を見る →</a>
 			</div>
 
 		</main>

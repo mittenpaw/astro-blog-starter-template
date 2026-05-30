@@ -1,0 +1,207 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const events = [
+	{
+		month: "1月",
+		name: "修正会",
+		reading: "しゅうしょうえ",
+		date: "1月1日",
+		desc: "新年最初の法要。阿弥陀如来の本願を讃え、新しい年のはじまりを念仏とともに迎えます。",
+	},
+	{
+		month: "3月",
+		name: "春季彼岸会",
+		reading: "しゅんきひがんえ",
+		date: "春分の日前後",
+		desc: "春彼岸の中日を中心に勤める法要。彼岸（浄土）に思いを向け、念仏をお称えします。",
+	},
+	{
+		month: "4月",
+		name: "花まつり",
+		reading: "はなまつり",
+		date: "4月8日",
+		desc: "お釈迦様のお誕生日をお祝いする法要。花御堂に誕生仏を安置し、甘茶をそそいで讃えます。",
+	},
+	{
+		month: "8月",
+		name: "盂蘭盆会",
+		reading: "うらぼんえ",
+		date: "8月13〜15日",
+		desc: "先立たれた方々に思いを向け、浄土の教えを聴聞する夏の法要です。",
+	},
+	{
+		month: "9月",
+		name: "秋季彼岸会",
+		reading: "しゅうきひがんえ",
+		date: "秋分の日前後",
+		desc: "秋彼岸の法要。西方浄土に沈む秋の夕日を縁として、念仏をお称えします。",
+	},
+	{
+		month: "11月",
+		name: "報恩講",
+		reading: "ほうおんこう",
+		date: "11月下旬",
+		desc: "真宗大谷派において最も大切な法要。親鸞聖人のご命日前後に、聖人のご恩に感謝し、教えに出遇いなおす時間をともにします。",
+	},
+];
+---
+
+<!doctype html>
+<html lang="ja">
+	<head>
+		<BaseHead
+			title="年間行事 | 真照寺"
+			description="真照寺の年間行事一覧。修正会・彼岸会・花まつり・盂蘭盆会・報恩講など、各法要についてご案内します。"
+		/>
+		<style>
+			main {
+				max-width: 680px;
+				margin: 0 auto;
+				padding: 4em 1.5em 6em;
+			}
+			.page-header {
+				padding-bottom: 2.5em;
+				border-bottom: 1px solid rgb(var(--gray-light));
+				margin-bottom: 3em;
+			}
+			.page-title {
+				font-size: 1.5em;
+				font-weight: 400;
+				letter-spacing: 0.2em;
+				color: rgb(var(--black));
+				margin: 0 0 0.5em;
+			}
+			.page-subtitle {
+				font-size: 0.85em;
+				color: rgb(var(--gray));
+				letter-spacing: 0.08em;
+				margin: 0;
+				line-height: 1.8;
+			}
+
+			.event-list {
+				list-style: none;
+				padding: 0;
+				margin: 0 0 3em;
+			}
+			.event-item {
+				display: grid;
+				grid-template-columns: 4em 1fr;
+				gap: 0 1.8em;
+				padding: 2.2em 0;
+				border-bottom: 1px solid rgb(var(--gray-light));
+			}
+			.event-month {
+				text-align: center;
+				padding-top: 0.25em;
+			}
+			.event-month .num {
+				display: block;
+				font-size: 1.6em;
+				font-weight: 400;
+				color: var(--accent);
+				line-height: 1;
+				margin-bottom: 0.1em;
+			}
+			.event-month .unit {
+				font-size: 0.72em;
+				color: rgb(var(--gray));
+				letter-spacing: 0.1em;
+			}
+			.event-name {
+				font-size: 1.05em;
+				font-weight: 700;
+				color: rgb(var(--black));
+				margin: 0 0 0.2em;
+				letter-spacing: 0.05em;
+			}
+			.event-reading {
+				font-size: 0.75em;
+				color: rgb(var(--gray));
+				letter-spacing: 0.05em;
+				margin: 0 0 0.4em;
+			}
+			.event-date {
+				font-size: 0.82em;
+				color: var(--accent);
+				letter-spacing: 0.05em;
+				margin: 0 0 0.9em;
+			}
+			.event-desc {
+				font-size: 0.9em;
+				color: rgb(var(--gray-dark));
+				line-height: 1.8;
+				margin: 0;
+			}
+
+			.monthly-note {
+				padding: 2em;
+				border: 1px solid rgb(var(--gray-light));
+				border-radius: 2px;
+				background: white;
+			}
+			.monthly-note h3 {
+				font-size: 0.95em;
+				font-weight: 700;
+				letter-spacing: 0.1em;
+				color: rgb(var(--black));
+				margin: 0 0 0.8em;
+			}
+			.monthly-note p {
+				font-size: 0.88em;
+				color: rgb(var(--gray));
+				line-height: 1.9;
+				margin: 0;
+			}
+
+			@media (max-width: 720px) {
+				main { padding: 2em 1.2em 4em; }
+				.event-item { grid-template-columns: 3.2em 1fr; gap: 0 1.2em; }
+			}
+		</style>
+	</head>
+	<body>
+		<Header />
+		<main>
+			<div class="page-header">
+				<h1 class="page-title">年間行事</h1>
+				<p class="page-subtitle">
+					真照寺では、年間を通じてさまざまな法要を勤めています。<br>
+					どなたでもお参りいただけます。お気軽にお越しください。
+				</p>
+			</div>
+
+			<ul class="event-list">
+				{
+					events.map((e) => (
+						<li class="event-item">
+							<div class="event-month">
+								<span class="num">{e.month.replace("月", "")}</span>
+								<span class="unit">月</span>
+							</div>
+							<div>
+								<p class="event-name">{e.name}</p>
+								<p class="event-reading">（{e.reading}）</p>
+								<p class="event-date">{e.date}</p>
+								<p class="event-desc">{e.desc}</p>
+							</div>
+						</li>
+					))
+				}
+			</ul>
+
+			<div class="monthly-note">
+				<h3>月例法座</h3>
+				<p>
+					毎月、定期的に法座を開いております。
+					お念仏をともにお称えし、法話を聴聞する場です。
+					日程は都度お知らせいたします。どなたでもお越しいただけます。
+				</p>
+			</div>
+		</main>
+		<Footer />
+	</body>
+</html>
