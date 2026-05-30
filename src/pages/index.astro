@@ -2,13 +2,13 @@
 import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import { SITE_TITLE, SITE_DESCRIPTION, AUTHOR_NAME } from '../consts';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 import { getCollection } from 'astro:content';
 import FormattedDate from '../components/FormattedDate.astro';
 
 const recentPosts = (await getCollection('blog'))
 	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-	.slice(0, 3);
+	.slice(0, 5);
 ---
 
 <!doctype html>
@@ -16,143 +16,193 @@ const recentPosts = (await getCollection('blog'))
 	<head>
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
 		<style>
-			.hero {
-				padding: 4em 0 3em;
+			main {
+				max-width: 680px;
+				margin: 0 auto;
+				padding: 4em 1.5em 6em;
+			}
+
+			/* ── 冒頭の一行 ── */
+			.opening {
 				text-align: center;
+				padding: 5em 0 4em;
 				border-bottom: 1px solid rgb(var(--gray-light));
-				margin-bottom: 3em;
+				margin-bottom: 4em;
 			}
-			.hero h1 {
-				font-size: 2.5em;
-				margin-bottom: 0.4em;
-			}
-			.hero p {
-				font-size: 1.1em;
-				color: rgb(var(--gray));
-				margin: 0;
-			}
-			.hero .tagline {
-				display: inline-block;
-				margin-top: 1em;
-				padding: 0.4em 1em;
-				background: rgba(var(--accent), 0.08);
-				color: var(--accent);
-				border-radius: 999px;
-				font-size: 0.9em;
-			}
-			.section-title {
-				font-size: 1.3em;
-				color: rgb(var(--gray-dark));
-				border-left: 4px solid var(--accent);
-				padding-left: 0.7em;
-				margin-bottom: 1.5em;
-			}
-			.recent-posts {
-				list-style: none;
-				margin: 0 0 3em;
-				padding: 0;
-				display: flex;
-				flex-direction: column;
-				gap: 1.2em;
-			}
-			.recent-posts li a {
-				display: flex;
-				gap: 1em;
-				text-decoration: none;
-				color: inherit;
-				padding: 1em;
-				border-radius: 8px;
-				transition: background 0.2s;
-			}
-			.recent-posts li a:hover {
-				background: rgb(var(--gray-light), 0.4);
-			}
-			.recent-posts .post-info {
-				flex: 1;
-			}
-			.recent-posts .post-title {
-				font-size: 1.1em;
-				font-weight: 700;
+			.opening .phrase {
+				font-size: 1.5em;
+				font-weight: 400;
+				letter-spacing: 0.15em;
 				color: rgb(var(--black));
-				margin: 0 0 0.2em;
-				line-height: 1.3;
+				line-height: 1.6;
+				margin: 0 0 1.5em;
 			}
-			.recent-posts .post-date {
+			.opening .phrase em {
+				font-style: normal;
+				color: var(--accent);
+			}
+			.opening .byline {
 				font-size: 0.85em;
 				color: rgb(var(--gray));
+				letter-spacing: 0.1em;
+				line-height: 2;
+				margin: 0;
 			}
-			.recent-posts img {
-				width: 120px;
-				height: 60px;
-				object-fit: cover;
-				border-radius: 6px;
-				flex-shrink: 0;
+			.opening .byline a {
+				color: rgb(var(--gray));
+				text-decoration: none;
+				border-bottom: 1px solid rgb(var(--gray-light));
 			}
-			.all-posts-link {
-				text-align: right;
-				margin-bottom: 3em;
+			.opening .byline a:hover {
+				color: var(--accent);
+				border-bottom-color: var(--accent);
 			}
-			.all-posts-link a {
-				font-size: 0.95em;
+
+			/* ── セクション見出し ── */
+			.section-label {
+				font-size: 0.72em;
+				letter-spacing: 0.25em;
+				text-transform: uppercase;
+				color: rgb(var(--gray));
+				margin: 0 0 2em;
+				display: flex;
+				align-items: center;
+				gap: 1em;
 			}
-			.about-section {
-				background: rgb(var(--gray-light), 0.3);
-				border-radius: 12px;
-				padding: 2em;
-				margin-bottom: 3em;
+			.section-label::after {
+				content: '';
+				flex: 1;
+				height: 1px;
+				background: rgb(var(--gray-light));
 			}
-			.about-section p {
+
+			/* ── 記事リスト ── */
+			.posts {
+				list-style: none;
+				margin: 0 0 5em;
+				padding: 0;
+			}
+			.posts li {
+				border-bottom: 1px solid rgb(var(--gray-light));
+			}
+			.posts li a {
+				display: block;
+				padding: 1.6em 0;
+				text-decoration: none;
+				color: inherit;
+				transition: all 0.15s;
+			}
+			.posts li a:hover .post-title {
+				color: var(--accent);
+			}
+			.post-title {
+				font-size: 1.05em;
+				font-weight: 700;
+				color: rgb(var(--black));
+				margin: 0 0 0.4em;
+				line-height: 1.5;
+				letter-spacing: 0.02em;
+				transition: color 0.15s;
+			}
+			.post-meta {
+				display: flex;
+				align-items: center;
+				gap: 0.8em;
+				font-size: 0.78em;
+				color: rgb(var(--gray));
+				letter-spacing: 0.05em;
+			}
+			.post-desc {
 				margin: 0.5em 0 0;
-				color: rgb(var(--gray-dark));
+				font-size: 0.88em;
+				color: rgb(var(--gray));
+				line-height: 1.7;
 			}
+
+			.more-link {
+				text-align: right;
+				margin-bottom: 5em;
+			}
+			.more-link a {
+				font-size: 0.85em;
+				letter-spacing: 0.08em;
+				color: var(--accent);
+				text-decoration: none;
+				border-bottom: 1px solid var(--accent);
+				padding-bottom: 1px;
+			}
+
+			/* ── テーマ一覧 ── */
+			.themes {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 0.8em;
+				margin: 0 0 2em;
+			}
+			.theme-tag {
+				font-size: 0.82em;
+				padding: 0.4em 1em;
+				border: 1px solid rgb(var(--gray-light));
+				border-radius: 2px;
+				color: rgb(var(--gray));
+				letter-spacing: 0.05em;
+				background: white;
+			}
+
 			@media (max-width: 720px) {
-				.hero h1 { font-size: 1.8em; }
-				.recent-posts img { display: none; }
+				.opening { padding: 3em 0 2.5em; }
+				.opening .phrase { font-size: 1.2em; }
+				main { padding: 2em 1.2em 4em; }
 			}
 		</style>
 	</head>
 	<body>
 		<Header />
 		<main>
-			<div class="hero">
-				<h1>こんにちは、{AUTHOR_NAME}です。</h1>
-				<p>技術・日常・思考を自由に綴るブログです。</p>
-				<span class="tagline">真宗大谷派 僧侶 / 龍樹 / AI</span>
+
+			<div class="opening">
+				<p class="phrase">
+					すべては<em>空</em>である——<br>だから、つながる。
+				</p>
+				<p class="byline">
+					真宗大谷派 僧侶・リキンダによる覚書。<br>
+					龍樹の哲学と人工知能について、思ったことを書き連ねています。<br>
+					<a href={`${import.meta.env.BASE_URL}/about`}>プロフィール</a>
+				</p>
 			</div>
 
-			<h2 class="section-title">最近の記事</h2>
-			<ul class="recent-posts">
+			<p class="section-label">最近の思索</p>
+			<ul class="posts">
 				{
 					recentPosts.map((post) => (
 						<li>
 							<a href={`${import.meta.env.BASE_URL}/blog/${post.id}/`}>
-								{post.data.heroImage && (
-									<img src={post.data.heroImage} alt={post.data.title} />
-								)}
-								<div class="post-info">
-									<p class="post-title">{post.data.title}</p>
-									<p class="post-date">
-										<FormattedDate date={post.data.pubDate} />
-									</p>
+								<p class="post-title">{post.data.title}</p>
+								<div class="post-meta">
+									<FormattedDate date={post.data.pubDate} />
 								</div>
+								{post.data.description && (
+									<p class="post-desc">{post.data.description}</p>
+								)}
 							</a>
 						</li>
 					))
 				}
 			</ul>
-			<div class="all-posts-link">
-				<a href={`${import.meta.env.BASE_URL}/blog`}>すべての記事を見る &rarr;</a>
+			<div class="more-link">
+				<a href={`${import.meta.env.BASE_URL}/blog`}>すべての記事 →</a>
 			</div>
 
-			<div class="about-section">
-				<h2 class="section-title" style="border-left: none; padding-left: 0;">このサイトについて</h2>
-				<p>
-					真宗大谷派の僧侶・リキンダが、龍樹・AI・日常について思ったことを書き連ねるブログです。
-				</p>
-				<p>
-					<a href={`${import.meta.env.BASE_URL}/about`}>プロフィールはこちら &rarr;</a>
-				</p>
+			<p class="section-label">主なテーマ</p>
+			<div class="themes">
+				<span class="theme-tag">龍樹・中観思想</span>
+				<span class="theme-tag">空（śūnyatā）</span>
+				<span class="theme-tag">真宗大谷派</span>
+				<span class="theme-tag">人工知能（AI）</span>
+				<span class="theme-tag">仏教と哲学</span>
+				<span class="theme-tag">親鸞</span>
 			</div>
+
 		</main>
 		<Footer />
 	</body>
