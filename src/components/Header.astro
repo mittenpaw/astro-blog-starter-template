@@ -16,32 +16,42 @@ import { SITE_TITLE } from '../consts';
 <style>
 	header {
 		margin: 0;
-		padding: 0 1em;
-		background: white;
-		box-shadow: 0 2px 8px rgba(var(--black), 5%);
+		padding: 0 1.5em;
+		background: #faf8f5;
+		border-bottom: 1px solid rgb(var(--gray-light));
 	}
 	h2 {
 		margin: 0;
-		font-size: 1em;
+		font-size: 0.9em;
+		letter-spacing: 0.05em;
 	}
 
 	h2 a,
 	h2 a.active {
 		text-decoration: none;
+		color: rgb(var(--gray-dark));
 	}
 	nav {
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
+		max-width: 680px;
+		margin: 0 auto;
 	}
 	nav a {
-		padding: 1em 0.5em;
-		color: var(--black);
-		border-bottom: 4px solid transparent;
+		padding: 1.2em 0.5em;
+		color: rgb(var(--gray));
+		border-bottom: 2px solid transparent;
 		text-decoration: none;
+		font-size: 0.85em;
+		letter-spacing: 0.08em;
+		transition: color 0.15s;
+	}
+	nav a:hover {
+		color: rgb(var(--gray-dark));
 	}
 	nav a.active {
-		text-decoration: none;
+		color: var(--accent);
 		border-bottom-color: var(--accent);
 	}
 </style>
