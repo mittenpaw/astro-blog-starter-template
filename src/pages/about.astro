@@ -1,43 +1,120 @@
 ---
-import Layout from '../layouts/BlogPost.astro';
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
 ---
 
-<Layout
-	title="プロフィール"
-	description="リキンダのプロフィールページ"
-	pubDate={new Date('2024-01-01')}
-	heroImage="/blog-placeholder-about.jpg"
->
-	<h2>リキンダ について</h2>
+<!doctype html>
+<html lang="ja">
+	<head>
+		<BaseHead
+			title="住職より | 真照寺"
+			description="真宗大谷派 真照寺 住職 リキンダのプロフィールと、このサイトについて。"
+		/>
+		<style>
+			main {
+				max-width: 680px;
+				margin: 0 auto;
+				padding: 4em 1.5em 6em;
+			}
+			.page-header {
+				padding-bottom: 2.5em;
+				border-bottom: 1px solid rgb(var(--gray-light));
+				margin-bottom: 3em;
+			}
+			.page-title {
+				font-size: 1.5em;
+				font-weight: 400;
+				letter-spacing: 0.2em;
+				color: rgb(var(--black));
+				margin: 0 0 0.5em;
+			}
+			.page-subtitle {
+				font-size: 0.85em;
+				color: rgb(var(--gray));
+				letter-spacing: 0.08em;
+				margin: 0;
+			}
+			.prose {
+				font-size: 0.95em;
+				line-height: 1.9;
+				color: rgb(var(--gray-dark));
+			}
+			.prose h2 {
+				font-size: 1.1em;
+				font-weight: 700;
+				letter-spacing: 0.1em;
+				color: rgb(var(--black));
+				margin: 2.5em 0 1em;
+			}
+			.prose h2:first-child {
+				margin-top: 0;
+			}
+			.prose p {
+				margin: 0 0 1.2em;
+			}
+			.prose ul {
+				padding-left: 1.5em;
+				margin: 0 0 1.2em;
+			}
+			.prose ul li {
+				margin-bottom: 0.5em;
+			}
+			.prose a {
+				color: var(--accent);
+				text-decoration: none;
+				border-bottom: 1px solid transparent;
+				transition: border-color 0.15s;
+			}
+			.prose a:hover {
+				border-bottom-color: var(--accent);
+			}
+		</style>
+	</head>
+	<body>
+		<Header />
+		<main>
+			<div class="page-header">
+				<h1 class="page-title">住職より</h1>
+				<p class="page-subtitle">真宗大谷派 真照寺</p>
+			</div>
 
-	<p>
-		真宗大谷派の僧侶です。
-	</p>
+			<div class="prose">
+				<h2>リキンダ について</h2>
 
-	<p>
-		龍樹（ナーガールジュナ）の思想、そして現代のAIについて、思ったことをここに書き連ねています。
-		仏教哲学と最先端技術のあいだを行き来しながら、「空」と「存在」について問い続けています。
-	</p>
+				<p>
+					真宗大谷派の僧侶です。
+				</p>
 
-	<h3>関心のあるテーマ</h3>
+				<p>
+					龍樹（ナーガールジュナ）の思想、そして現代のAIについて、思ったことをここに書き連ねています。
+					仏教哲学と最先端技術のあいだを行き来しながら、「空」と「存在」について問い続けています。
+				</p>
 
-	<ul>
-		<li>龍樹・中観思想・空の哲学</li>
-		<li>真宗大谷派の教えと現代への応用</li>
-		<li>人工知能（AI）と意識・存在</li>
-		<li>仏教と西洋哲学の対話</li>
-	</ul>
+				<h2>関心のあるテーマ</h2>
 
-	<h3>このブログについて</h3>
+				<ul>
+					<li>龍樹・中観思想・空の哲学</li>
+					<li>真宗大谷派の教えと現代への応用</li>
+					<li>人工知能（AI）と意識・存在</li>
+					<li>仏教と西洋哲学の対話</li>
+					<li>親鸞聖人の「悪人正機」</li>
+				</ul>
 
-	<p>
-		思いつきのメモから、少し腰を据えた考察まで、形式にこだわらず書いています。
-		「正しいこと」より「正直なこと」を大切にしています。
-	</p>
+				<h2>このブログについて</h2>
 
-	<h3>連絡先</h3>
+				<p>
+					思いつきのメモから、少し腰を据えた考察まで、形式にこだわらず書いています。
+					「正しいこと」より「正直なこと」を大切にしています。
+				</p>
 
-	<p>
-		メール: <a href="mailto:yoshio_kawamoto@hotmail.com">yoshio_kawamoto@hotmail.com</a>
-	</p>
-</Layout>
+				<h2>連絡先</h2>
+
+				<p>
+					メール: <a href="mailto:yoshio_kawamoto@hotmail.com">yoshio_kawamoto@hotmail.com</a>
+				</p>
+			</div>
+		</main>
+		<Footer />
+	</body>
+</html>
