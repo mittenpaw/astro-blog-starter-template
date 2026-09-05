@@ -142,10 +142,9 @@ const upcomingEvents = [
 				font-size: 0.78em;
 				color: rgb(var(--gray));
 				letter-spacing: 0.05em;
-				margin-bottom: 0.4em;
 			}
 			.post-desc {
-				margin: 0;
+				margin: 0.4em 0 0;
 				font-size: 0.87em;
 				color: rgb(var(--gray));
 				line-height: 1.7;
@@ -194,6 +193,29 @@ const upcomingEvents = [
 				font-size: 0.82em;
 				color: rgb(var(--gray));
 				letter-spacing: 0.03em;
+			}
+
+			/* ── 住職ご挨拶 ── */
+			.greeting {
+				font-size: 0.92em;
+				line-height: 2;
+				color: rgb(var(--gray-dark));
+				border-left: 3px solid rgb(var(--gray-light));
+				padding-left: 1.5em;
+				margin-bottom: 0;
+			}
+			.greeting p {
+				margin: 0 0 1.2em;
+			}
+			.greeting p:last-of-type {
+				margin-bottom: 0;
+			}
+			.greeting-sig {
+				margin-top: 1.8em !important;
+				font-size: 0.85em;
+				letter-spacing: 0.1em;
+				color: rgb(var(--gray));
+				text-align: right;
 			}
 
 			@media (max-width: 720px) {
@@ -257,6 +279,26 @@ const upcomingEvents = [
 			</ul>
 			<div class="more-link">
 				<a href={`${import.meta.env.BASE_URL}/events`}>すべての行事を見る →</a>
+			</div>
+
+			<p class="section-label">住職からのご挨拶</p>
+			<div class="greeting">
+				<p>
+					　現代社会には、実に様々な問題や課題が山積しています。仏教は、その根底にあるものを端的に「関係性の問題」と教えてきました。
+				</p>
+				<p>
+					私と他者。私と環境。家族、友人、会社や学校での人間関係。国と国。自分と自分。そして、自分とお金との関係。
+				</p>
+				<p>
+					「あちらを立てればこちらが立たず、こちらを立てればあちらが立たず」——この言葉の通り、人生において誰もが一度は、こうした関係性の狭間で立ちすくんだ経験をお持ちのことでしょう。
+				</p>
+				<p>
+					仏教には、そうした関係の問題に応えうる、確かな力が備わっています。自と他という隔たりを超え、共に安んじて生きられる世界。それを浄土と呼びます。
+				</p>
+				<p>
+					真照寺は、この浄土の教えに根を下ろしながら、一人ひとりが尊重され、地域社会に開かれた、丁寧な寺づくりに、これからも精進してまいります。
+				</p>
+				<p class="greeting-sig">住職　リキンダ</p>
 			</div>
 
 		</main>
