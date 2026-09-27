@@ -91,6 +91,29 @@ const upcomingEvents = [
 				border-color: var(--accent-dark);
 				color: white;
 			}
+			.lang-links {
+				margin-top: 1.8em;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				gap: 0.8em;
+				font-size: 0.75em;
+				letter-spacing: 0.1em;
+				color: rgb(var(--gray));
+			}
+			.lang-links a {
+				color: rgb(var(--gray));
+				text-decoration: none;
+				border-bottom: 1px solid transparent;
+				transition: color 0.15s, border-color 0.15s;
+			}
+			.lang-links a:hover {
+				color: var(--accent);
+				border-bottom-color: var(--accent);
+			}
+			.lang-links .sep {
+				color: rgb(var(--gray-light));
+			}
 
 			/* ── セクション見出し ── */
 			.section-label {
@@ -240,6 +263,11 @@ const upcomingEvents = [
 				<div class="hero-links">
 					<a class="primary" href={`${import.meta.env.BASE_URL}/access`}>アクセス</a>
 					<a href={`${import.meta.env.BASE_URL}/events`}>年間行事</a>
+				</div>
+				<div class="lang-links">
+					<a href="https://english.higashihonganji.or.jp/history/" target="_blank" rel="noopener">English</a>
+					<span class="sep">·</span>
+					<a href="https://higashihonganji.org.br" target="_blank" rel="noopener">Português</a>
 				</div>
 			</div>
 
